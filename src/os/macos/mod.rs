@@ -224,7 +224,7 @@ pub struct Window {
     pub shared_data: SharedData,
     key_handler: KeyHandler,
     update_rate: UpdateRate,
-    pub has_set_data: bool,
+    pub _has_set_data: bool,
     menus: Vec<MenuHandle>,
 }
 
@@ -256,7 +256,7 @@ unsafe extern "C" fn char_callback(window: *mut c_void, code_point: u32) {
 }
 
 impl HasWindowHandle for Window {
-    fn window_handle(&self) -> std::result::Result<WindowHandle, HandleError> {
+    fn window_handle(&'_ self) -> std::result::Result<WindowHandle<'_>, HandleError> {
         let raw_ns_view = self.view_handle as *mut _;
         let ns_view = match NonNull::new(raw_ns_view) {
             Some(ns_view) => ns_view,
@@ -270,7 +270,7 @@ impl HasWindowHandle for Window {
 }
 
 impl HasDisplayHandle for Window {
-    fn display_handle(&self) -> std::result::Result<DisplayHandle, HandleError> {
+    fn display_handle(&'_ self) -> std::result::Result<DisplayHandle<'_>, HandleError> {
         let handle = AppKitDisplayHandle::new();
         let raw_handle = RawDisplayHandle::AppKit(handle);
         unsafe { Ok(DisplayHandle::borrow_raw(raw_handle)) }
@@ -320,7 +320,7 @@ impl Window {
                 },
                 key_handler: KeyHandler::new(),
                 update_rate: UpdateRate::new(),
-                has_set_data: false,
+                _has_set_data: false,
                 menus: Vec::new(),
             })
         }

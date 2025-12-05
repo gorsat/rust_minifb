@@ -1,4 +1,4 @@
-use minifb::{Key, ScaleMode, Window, WindowOptions};
+use minifb::{Key, Window, WindowOptions};
 
 const WIDTH: usize = 1280;
 const HEIGHT: usize = 720;

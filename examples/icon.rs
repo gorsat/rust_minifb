@@ -3,7 +3,7 @@ use std::convert::TryFrom;
 #[cfg(target_os = "windows")]
 use std::str::FromStr;
 
-use minifb::{Icon, Key, Window, WindowOptions};
+use minifb::{Key, Window, WindowOptions};
 
 const WIDTH: usize = 1280;
 const HEIGHT: usize = 720;
